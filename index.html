@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv = "X-UA-Compatible" content="IE=edge">
+    <meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+            body {
+              font-family: "Lato", sans-serif;
+            }
+            
+            .sidenav {
+              height: 100%;
+              width: 0;
+              position: fixed;
+              z-index: 1;
+              top: 0;
+              right: 0;
+              background-color: #111;
+              overflow-x: hidden;
+              transition: 0.5s;
+              padding-top: 60px;
+            }
+            
+            .sidenav a {
+              padding: 8px 8px 8px 32px;
+              text-decoration: none;
+              font-size: 25px;
+              color: #818181;
+              display: block;
+              transition: 0.3s;
+            }
+            
+            .sidenav a:hover {
+              color: #f1f1f1;
+            }
+            
+            .sidenav .closebtn {
+              position: absolute;
+              top: 0;
+              right: 25px;
+              font-size: 36px;
+              margin-left: 50px;
+            }
+            
+            @media screen and (max-height: 450px) {
+              .sidenav {padding-top: 15px;}
+              .sidenav a {font-size: 18px;}
+            }
+        .container-flued{
+            width: 100%
+        }
+    .quote{
+        margin: 15px;
+    }
+    .col-md-2{
+        width:16.66%;
+    }
+    .stu_stule_1{
+        color: white;
+        background-color: black;
+        padding: 13px;
+        border-radius: 5px;
+    }
+    #Students{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .txtLarge{
+        font-size: xx-large;
+    }
+    .stu_stu{
+        margin-top: 130px;
+        color: white;
+        padding: 13px;
+    }
+    .Alignn{
+        
+        padding: 12px 0px 11px 11px;
+    }
+    </style>
+    
+    <script>
+        (function loadDoc() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               studentData(this.responseText);
+            }
+          };
+          xhttp.open("GET", "https://student-management-api-1u3cd4j7s.now.sh/students", true);
+          xhttp.send();
+        })();
+
+        function studentData(data){
+        let StudentData = JSON.parse(data);
+        
+        var showData = document.getElementById("Students");
+
+        for(let i= 0; i<= StudentData.length -1; i++)
+            {//name: "Rahul", class: 3, gender: "M", section: "B", rollNumber: "1231
+                let Sname = StudentData[i].name;
+                let Sclass = StudentData[i].class;
+                let Sgender = StudentData[i].gender;    
+                let Snamesection = StudentData[i].section;
+                let SrollNumber = StudentData[i].rollNumber;
+                let Ssports = StudentData[i].sports;
+                let Sage = StudentData[i].age;
+
+
+                var student = document.createElement("div");
+                student.setAttribute('class', 'col-md-2 quote');
+                student.id=SrollNumber;
+                student.setAttribute('onclick', 'openNav(); getDAta(this.id); ');
+
+                var Stu_sub = document.createElement("div");
+                Stu_sub.setAttribute('class', 'stu_stule_1');
+
+                var Stu_sub_1 = document.createElement("div");
+                var Name_label1 = document.createElement("span");                  
+                Stu_sub_1.setAttribute('class', 'Align');   
+
+                Name_label1.appendChild(document.createTextNode("Name: "));
+                var Name_Value_label1 = document.createElement("label");  
+                Name_Value_label1.appendChild(document.createTextNode(Sname));
+                Stu_sub_1.appendChild(Name_label1);         
+                Stu_sub_1.appendChild(Name_Value_label1);
+
+                var Stu_sub_2 = document.createElement("div");
+                var Name_label2 = document.createElement("span");                 
+                Stu_sub_2.setAttribute('class', 'Align');     
+
+                Name_label2.appendChild(document.createTextNode("Age: "));
+                var Name_Value_label2 = document.createElement("label");   
+                
+                Name_Value_label2.appendChild(document.createTextNode(Sage));
+                Stu_sub_2.appendChild(Name_label2);         
+                Stu_sub_2.appendChild(Name_Value_label2);
+
+                var Stu_sub_3 = document.createElement("div");
+                var Name_label3 = document.createElement("span");               
+                Stu_sub_3.setAttribute('class', 'Align');  
+
+                Name_label3.appendChild(document.createTextNode("Gender: "));
+                var Name_Value_label3 = document.createElement("label");   
+
+                Name_Value_label3.appendChild(document.createTextNode(Sgender));
+                Stu_sub_3.appendChild(Name_label3);         
+                Stu_sub_3.appendChild(Name_Value_label3);
+
+                var Stu_sub_4 = document.createElement("div");
+                var Name_label4 = document.createElement("span");           
+                Stu_sub_4.setAttribute('class', 'Align');  
+
+                Name_label4.appendChild(document.createTextNode("Sports: "));
+                var Name_Value_label4 = document.createElement("label");  
+
+                Name_Value_label4.appendChild(document.createTextNode(Ssports));
+                Stu_sub_4.appendChild(Name_label4);         
+                Stu_sub_4.appendChild(Name_Value_label4);
+
+                Stu_sub.appendChild(Stu_sub_1); 
+                Stu_sub.appendChild(Stu_sub_2); 
+                Stu_sub.appendChild(Stu_sub_3); 
+                Stu_sub.appendChild(Stu_sub_4); 
+
+                student.appendChild(Stu_sub);
+                showData.appendChild(student);
+    }
+};
+
+function getDAta(e){
+    debugger;
+    var name = $('#'+e).find('label')[0].innerText;    
+    var age = $('#'+e).find('label')[1].innerText;
+    var gender = $('#'+e).find('label')[2].innerText;
+    var sports = $('#'+e).find('label')[3].innerText;
+    
+    var namee = document.getElementById('name').innerHTML = name;
+    var agee = document.getElementById('age').innerHTML = age;
+    var genn = document.getElementById('gen').innerHTML = gender;
+    var sopr = document.getElementById('sports').innerHTML = sports;
+};
+ </script>
+ 
+<script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
+</head>
+<body>
+        <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="stu_stu">
+                    <div class="Alignn">
+                        <span>Name: </span>
+                        <label id="name"></label>
+                    </div>
+                    <div class="Alignn">
+                        <span>Age: </span>
+                        <label id="age"></label>
+                    </div>
+                    <div class="Alignn">
+                        <span>Gender: </span>
+                        <label id="gen"></label>
+                    </div>
+                    <div class="Alignn">
+                        <span>Sports: </span>
+                        <label id="sports"></label>
+                    </div>
+                </div>
+              </div>
+
+<header>
+    <center>
+        <strong class="txtLarge">
+            Student Information System
+        </strong>
+    </center>
+</header>
+
+<section>
+<div class="container-flued">
+    <div></div>
+    <div id="Students"></div>
+</div>
+</section>
+</body>
+</html>
