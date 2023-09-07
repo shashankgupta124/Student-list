@@ -56,17 +56,22 @@
         margin: 15px;
     }
     .col-md-2{
-        width:16.66%;
+        width:17%;
     }
     .stu_stule_1{
         color: white;
         background-color: black;
         padding: 13px;
         border-radius: 5px;
+        cursor: pointer;
     }
     #Students{
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+    }
+    header{
+        margin: 2em;
     }
     .txtLarge{
         font-size: xx-large;
@@ -75,6 +80,10 @@
         margin-top: 130px;
         color: white;
         padding: 13px;
+    }
+    .Align{
+        
+        padding: 3px;
     }
     .Alignn{
         
@@ -172,7 +181,6 @@
 };
 
 function getDAta(e){
-    debugger;
     var name = $('#'+e).find('label')[0].innerText;    
     var age = $('#'+e).find('label')[1].innerText;
     var gender = $('#'+e).find('label')[2].innerText;
